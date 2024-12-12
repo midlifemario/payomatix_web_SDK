@@ -1,0 +1,20 @@
+{
+    "name": "mypackage/lpayment",
+    "version": "1.0.0",
+    "description": "Payomatix API",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Payomatix\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jitesh Menia",
+            "email": "jitesh.menia@payomatix.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

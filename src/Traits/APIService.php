@@ -12,17 +12,19 @@ trait APIService
         if (!empty($payload)) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         }
-        if (isset($options['timeout']) && is_integer($options['timeout']) && $options['timeout'] > 0) {
-        	curl_setopt($ch, CURLOPT_TIMEOUT, $options['timeout']);
-        } else {
-        	curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-        }
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         if (!empty($headers)) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
+        if (isset($options['timeout']) && is_integer($options['timeout']) && $options['timeout'] > 0) {
+        	curl_setopt($ch, CURLOPT_TIMEOUT, $options['timeout']);
+        }
+        if (isset($options['connect_timeout']) && is_integer($options['connect_timeout']) && $options['connect_timeout'] > 0) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $options['connect_timeout']);
+        }
+        if (isset($options['ssl_verifyhost']) && $options['ssl_verifyhost'] == false) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
         curl_close($ch);
 
@@ -37,17 +39,19 @@ trait APIService
         if (!empty($payload)) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         }
-        if (isset($options['timeout']) && is_integer($options['timeout']) && $options['timeout'] > 0) {
-            curl_setopt($ch, CURLOPT_TIMEOUT, $options['timeout']);
-        } else {
-            curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-        }
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         if (!empty($headers)) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
+        if (isset($options['timeout']) && is_integer($options['timeout']) && $options['timeout'] > 0) {
+            curl_setopt($ch, CURLOPT_TIMEOUT, $options['timeout']);
+        }
+        if (isset($options['connect_timeout']) && is_integer($options['connect_timeout']) && $options['connect_timeout'] > 0) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $options['connect_timeout']);
+        }
+        if (isset($options['ssl_verifyhost']) && $options['ssl_verifyhost'] == false) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
         curl_close($ch);
 

@@ -1,5 +1,5 @@
 {
-    "name": "mypackage/lpayment",
+    "name": "payomatix/web-sdk",
     "version": "1.0.0",
     "description": "Payomatix API",
     "type": "library",

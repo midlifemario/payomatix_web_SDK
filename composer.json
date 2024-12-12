@@ -1,5 +1,5 @@
 {
-    "name": "payomatix/web-sdk",
+    "name": "payomatix/php-web-sdk",
     "version": "1.0.0",
     "description": "Payomatix API",
     "type": "library",

@@ -36,11 +36,36 @@ class ResponseService
 		];
 	}
 
+	public static function notFound($response)
+	{
+		return [
+			'status' => false,
+			'errors' => $response['response'] ?? 'not found.',
+		];
+	}
+
 	public static function standardThreeDS($response)
 	{
 		return [
 			'status' => true,
 			'redirect_url' => $response['redirect_url'],
+		];
+	}
+
+	public static function standardSeamlessThreeDS($response)
+	{
+		return [
+			'status' => true,
+			'order_id' => $response['redirect_url'],
+			'redirect_url' => $response['redirect_url'],
+		];
+	}
+
+	public static function standardStatus($response)
+	{
+		return [
+			'status' => true,
+			'data' => $response['data'],
 		];
 	}
 }

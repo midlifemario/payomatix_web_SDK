@@ -28,4 +28,9 @@ class Payomatix extends PaymentService
 	{
 		return (array) PaymentService::initializeSeamless($fields, $this->getOptions());
 	}
+
+	public function status($fields): array
+	{
+		return (array) PaymentService::initializeStatus($fields, $this->getOptions());
+	}
 }

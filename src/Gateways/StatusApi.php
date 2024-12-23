@@ -7,19 +7,15 @@ use Payomatix\Config\PackageConfig;
 use Payomatix\Service\ResponseService;
 use Payomatix\Service\ValidationService;
 
-class Seamless extends PackageConfig
+class StatusApi extends PackageConfig
 {
 	use APIService;
 
 	protected static $secret_key;
 
-	public static function initializePayment($payload, $options): array
+	public static function initializeApi($payload, $options): array
 	{
-		if (isset($payload['is_test']) && $payload['is_test'] == true) {
-			$url = PackageConfig::getSeamlessTestPaymentUrl(); 
-		} else {
-			$url = PackageConfig::getSeamlessLivePaymentUrl();
-		}
+		$url = PackageConfig::getStatusUrl();
 
 		self::$secret_key = self::getSecretKey();
 
@@ -33,7 +29,7 @@ class Seamless extends PackageConfig
 			'Authorization: '. self::$secret_key,
 		];
 
-		$validations = ValidationService::seamlessValidation($payload);
+		$validations = ValidationService::statusValidation($payload);
 
 		if (!empty($validations)) {
 			return ResponseService::validationError($validations);
@@ -41,13 +37,12 @@ class Seamless extends PackageConfig
 
 		try {
 			$response = json_decode(self::curlPostRequest($url, $headers, json_encode($payload), $options), true);
-			dd($response);
-			if (isset($response['redirect_url']) && !empty($response['redirect_url'])) {
-				return ResponseService::standardSeamlessThreeDS($response);
-			} elseif (isset($response['status']) && $response['status'] == 'status') {
-				return ResponseService::standardSeamlessSuccess($response);
-			} elseif (isset($response['status']) && $response['status'] == 'fail') {
-				return ResponseService::failed($response);
+			if (isset($response['status']) && $response['status'] == 'success') {
+				return ResponseService::standardStatus($response);
+			} elseif (isset($response['status']) && $response['status'] == 'error') {
+				return ResponseService::notFound($response);
+			} elseif (isset($response['status']) && $response['status'] == 'validation_error') {
+				return ResponseService::validationError($response);
 			} else {
 				return ResponseService::serverError();
 			}

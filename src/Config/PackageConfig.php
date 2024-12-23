@@ -15,18 +15,18 @@ class PackageConfig
     public const SEAMLESS_PAYMENT_URL = '/payment/merchant/seamless/transaction';
     public const SEAMLESS_PAYMENT_TEST_URL = '/payment/merchant/transaction';
 
-    public const GET_URL = '/payment/get/transaction';
+    public const STATUS_URL = '/payment/get/transaction';
 
 	protected static function getSecretKey()
 	{
 		$env_path = __DIR__ . '/../../../../../';
-		$test_env_path = __DIR__.'/../../';
+		$manual_env_path = __DIR__.'/../../';
 
 		if(file_exists($env_path.'.env')) {
 		    $dotenv = Dotenv::createImmutable($env_path);
 			$dotenv->load();
-		} elseif (file_exists($test_env_path.'.env')) {
-		    $dotenv = Dotenv::createImmutable($test_env_path);
+		} elseif (file_exists($manual_env_path.'.env')) {
+		    $dotenv = Dotenv::createImmutable($manual_env_path);
 			$dotenv->load();
 		}
 
@@ -66,5 +66,10 @@ class PackageConfig
 	protected static function getSeamlessLivePaymentUrl()
 	{
 		return self::BASE_URL . self::SEAMLESS_PAYMENT_URL;
+	}
+
+	protected static function getStatusUrl()
+	{
+		return self::BASE_URL . self::STATUS_URL;
 	}
 }

@@ -67,7 +67,16 @@ class Fields
 			'return_url',
 			'notify_url',
 			'merchant_ref',
+			'order_id',
 			'search_key',
+		];
+	}
+
+	public static function getStatusFields()
+	{
+		return [
+			'merchant_ref',
+			'order_id',
 		];
 	}
 
@@ -75,8 +84,10 @@ class Fields
 	{
 		if ($type == 1) {
 			$required_fields = self::getNonSeamlessFields();
-		} else {
+		} elseif ($type == 2) {
 			$required_fields = self::getSeamlessFields();
+		} else {
+			$required_fields = self::getStatusFields();
 		}
 
 		foreach ($fields as $name => $value) {

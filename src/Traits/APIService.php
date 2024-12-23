@@ -22,7 +22,7 @@ trait APIService
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $options['connect_timeout']);
         }
         if (isset($options['ssl_verifyhost']) && $options['ssl_verifyhost'] == false) {
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
@@ -49,7 +49,7 @@ trait APIService
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $options['connect_timeout']);
         }
         if (isset($options['ssl_verifyhost']) && $options['ssl_verifyhost'] == false) {
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);

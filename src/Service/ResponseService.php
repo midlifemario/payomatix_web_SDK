@@ -28,6 +28,14 @@ class ResponseService
 		];
 	}
 
+	public static function failed($response)
+	{
+		return [
+			'status' => false,
+			'errors' => $response['message'] ?? 'failed',
+		];
+	}
+
 	public static function standardThreeDS($response)
 	{
 		return [

@@ -4,7 +4,7 @@ namespace Payomatix\Helper;
 
 class Fields
 {
-	public static function getFields()
+	public static function getNonSeamlessFields()
 	{
 		return [
 			'email',
@@ -44,8 +44,41 @@ class Fields
 		];
 	}
 
-	public static function setFields($fields)
+	public static function getSeamlessFields()
 	{
+		return [
+			'first_name',
+			'last_name',
+			'email',
+			'phone_no',
+			'address',
+			'country',
+			'state',
+			'city',
+			'zip',
+			'amount',
+			'currency',
+			'type_id',
+			'card_no',
+			'ccexpiry_month',
+			'ccexpiry_year',
+			'cvv_number',
+			'customer_vpa',
+			'return_url',
+			'notify_url',
+			'merchant_ref',
+			'search_key',
+		];
+	}
+
+	public static function setFields($fields, $type=1)
+	{
+		if ($type == 1) {
+			$required_fields = self::getNonSeamlessFields();
+		} else {
+			$required_fields = self::getSeamlessFields();
+		}
+
 		foreach ($fields as $name => $value) {
 			// other_data
 			if ($name == 'other_data') {
@@ -56,7 +89,7 @@ class Fields
 						foreach ($sub_value as $product_index => $product) {
 							if (is_array($product)) {
 								foreach ($product as $product_key => $product_value) {
-									if (!in_array($product_key, self::getFields()['other_data']['products'])) {
+									if (!in_array($product_key, $required_fields['other_data']['products'])) {
 										unset($fields['other_data']['products'][$product_index][$product_key]);
 									}
 								}
@@ -65,14 +98,14 @@ class Fields
 								unset($fields['other_data']['products'][$product_index]);
 							}
 						}
-					} elseif (in_array($sub_name, self::getFields()[$name])) {
+					} elseif (in_array($sub_name, $required_fields[$name])) {
 						// nothing to do
 					} else {
 						unset($fields['other_data'][$sub_name]);
 					}
 				}
 			} else {
-				if (!in_array($name, self::getFields())) {
+				if (!in_array($name, $required_fields)) {
 					unset($fields[$name]);
 				}
 			}

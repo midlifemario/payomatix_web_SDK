@@ -6,16 +6,25 @@ use Payomatix\Helper\Fields as FieldOptions;
 
 class ValidationService extends FieldOptions
 {
-	public static function paymentAPIValidation(array $fields)
+	public static function nonSeamlessValidation(array $fields)
 	{
 		$fields = self::setFields($fields);
 
-		$validations = self::paymentAPIFields();
+		$validations = self::nonSeamlessFields();
 
 		return self::validateFields($validations, $fields);
 	}
 
-	public static function paymentAPIFields()
+	public static function seamlessValidation(array $fields)
+	{
+		$fields = self::setFields($fields, 2);
+
+		$validations = self::seamlessFields();
+
+		return self::validateFields($validations, $fields);
+	}
+
+	public static function nonSeamlessFields()
 	{
 		return [
 			'email' => 'required|email',
@@ -56,6 +65,43 @@ class ValidationService extends FieldOptions
 		];
 	}
 
+	public static function seamlessFields()
+	{
+		return [
+			'first_name' => 'required',
+			'last_name' => 'required',
+			'email' => 'required|email',
+			'phone_no' => 'required',
+
+			'address' => 'nullable',
+			'country' => 'nullable|min:2|max:2',
+			'state' => 'nullable',
+			'city' => 'nullable',
+			'zip' => 'nullable|min:6',
+
+			'amount' => 'required',
+			'currency' => 'required',
+			'type_id' => 'nullable|in:1,2,3,4,5',
+
+			'card_no' => 'required_if:type_id,1,2',
+			'ccexpiry_month' => 'required_if:type_id,1,2',
+			'ccexpiry_year' => 'required_if:type_id,1,2',
+			'cvv_number' => 'required_if:type_id,1,2',
+
+			'customer_vpa' => 'nullable',
+
+			'search_key' => 'nullable',
+			'customer_vpa' => 'nullable',
+
+
+			'return_url' => 'required',
+			'notify_url' => 'required',
+
+			'merchant_ref' => 'nullable',
+			'search_key' => 'nullable',
+		];
+	}
+
 	public static function validateFields($validations, $fields)
 	{
 		if (empty($validations)) {
@@ -71,34 +117,38 @@ class ValidationService extends FieldOptions
 			    // field is required
 				if ($validate_method === 'required') {
 			        if (null !== self::validateRequired($fields, $key)) {
-			        	$validation_errors[$key]['required'] = $key. ' field is required.';
+			        	$validation_errors[$key] = $key. ' field is required.';
 			        }
 			    // field should be email
 				} elseif ($validate_method === 'email') {
 					if (null !== self::validateEmail($fields, $key)) {
-			        	$validation_errors[$key]['required'] = $key. ' field is not valid email.';
+			        	$validation_errors[$key] = $key. ' field is not valid email.';
 			        }
 			    // field is array
 				} elseif ($validate_method === 'array') {
 					if (null !== self::validateArray($fields, $key)) {
-			        	$validation_errors[$key]['required'] = $key. ' field is required.';
+			        	$validation_errors[$key] = $key. ' field is required.';
 			        }
 			    // nothing to do in case nullable
 				} elseif ($validate_method === 'nullable') {
 					continue;
-			    // field minimum
+			    // required_if minimum
+				} elseif (substr($validate_method, 0, 12) == 'required_if:') {
+					if (null !== self::validateRequiredIf($fields, $key, $validate_method)) {
+			        	$validation_errors[$key] = $key. ' field is required with value passed of '.explode(',', str_replace('required_if:', '', $validate_method))[0].' field';
+			        }
 				} elseif (substr($validate_method, 0, 4) == 'min:') {
 					if (null !== self::validateMin($fields, $key, $validate_method)) {
-			        	$validation_errors[$key]['min'] = $key. ' field should not be less than '.str_replace('min:', '', $validate_method);
+			        	$validation_errors[$key] = $key. ' field should not be less than '.str_replace('min:', '', $validate_method);
 			        }
 				} elseif (substr($validate_method, 0, 4) == 'max:') {
 					if (null !== self::validateMax($fields, $key, $validate_method)) {
-			        	$validation_errors[$key]['max'] = $key. ' field should not be greater than '.str_replace('max:', '', $validate_method);
+			        	$validation_errors[$key] = $key. ' field should not be greater than '.str_replace('max:', '', $validate_method);
 			        }
 			    // field from in
 				} elseif (substr($validate_method, 0, 3) == 'in:') {
 					if (null !== self::validateIn($fields, $key, $validate_method)) {
-			        	$validation_errors[$key]['in'] = $key. ' field should be from '.str_replace('in:', '', $validate_method);
+			        	$validation_errors[$key] = $key. ' field should be from '.str_replace('in:', '', $validate_method);
 			        }
 				} else {
 					// 
@@ -132,6 +182,23 @@ class ValidationService extends FieldOptions
         		return 1;
 			}
         }
+	}
+
+	public static function validateRequiredIf($fields, $key, $validate_method)
+	{
+		$validate_value = self::getValueFromArray($fields, $key);
+		$dependent_field_value = explode(',', str_replace('required_if:', '', $validate_method));
+
+		if (isset($fields[$dependent_field_value[0]]) && $dependent_field_value[0] != null) {
+			if (in_array($fields[$dependent_field_value[0]], $dependent_field_value)) {
+				unset($dependent_field_value[0]);
+				if (isset($validate_value) && $validate_value != null) {
+		        	return null;
+		        } else {
+		        	return 1;
+		        }
+			}
+		}
 	}
 
 	public static function validateIn($fields, $key, $validate_method)

@@ -12,6 +12,14 @@ class ResponseService
 		];
 	}
 
+	public static function wrongSecKey($response)
+	{
+		return [
+			'status' => false,
+			'errors' => $response['response'] ?? 'Unauthorised request, please check Secret Key.',
+		];
+	}
+
 	public static function serverError()
 	{
 		return [

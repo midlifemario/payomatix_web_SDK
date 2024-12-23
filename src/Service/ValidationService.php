@@ -38,7 +38,7 @@ class ValidationService extends FieldOptions
 		return [
 			'email' => 'required|email',
 			'amount' => 'required',
-			'currency' => 'required',
+			'currency' => 'required|min:3|max:3',
 			'return_url' => 'required',
 			'notify_url' => 'required',
 
@@ -81,31 +81,21 @@ class ValidationService extends FieldOptions
 			'last_name' => 'required',
 			'email' => 'required|email',
 			'phone_no' => 'required',
-
 			'address' => 'nullable',
 			'country' => 'nullable|min:2|max:2',
 			'state' => 'nullable',
 			'city' => 'nullable',
 			'zip' => 'nullable|min:6',
-
 			'amount' => 'required',
-			'currency' => 'required',
-			'type_id' => 'nullable|in:1,2,3,4,5',
-
+			'currency' => 'required|min:3|max:3',
+			'type_id' => 'required|in:1,2,3,4,5',
 			'card_no' => 'required_if:type_id,1,2',
 			'ccexpiry_month' => 'required_if:type_id,1,2',
 			'ccexpiry_year' => 'required_if:type_id,1,2',
 			'cvv_number' => 'required_if:type_id,1,2',
-
 			'customer_vpa' => 'nullable',
-
-			'search_key' => 'nullable',
-			'customer_vpa' => 'nullable',
-
-
-			'return_url' => 'required',
-			'notify_url' => 'required',
-
+			'return_url' => 'required|url',
+			'notify_url' => 'required|url',
 			'merchant_ref' => 'nullable',
 			'search_key' => 'nullable',
 		];
@@ -192,8 +182,10 @@ class ValidationService extends FieldOptions
 
 	public static function validateArray($fields, $key)
 	{
-		if (!(null !== self::getValueFromArray($fields, $key) && is_array(self::getValueFromArray($fields, $key)))) {
-			return 1;
+		if (null !== self::getValueFromArray($fields, $key)) {
+			if (!is_array(self::getValueFromArray($fields, $key))) {
+				return 1;
+			}
 		}
 	}
 

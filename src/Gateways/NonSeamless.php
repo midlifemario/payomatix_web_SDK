@@ -39,6 +39,8 @@ class NonSeamless extends PackageConfig
 			$response = json_decode(self::curlPostRequest($url, $headers, json_encode($payload), $options), true);
 			if (isset($response['redirect_url']) && !empty($response['redirect_url'])) {
 				return ResponseService::standardThreeDS($response);
+			} elseif (isset($response['status']) && $response['status'] == 'unauthorised') {
+				return ResponseService::wrongSecKey($response);
 			} else {
 				return ResponseService::serverError();
 			}

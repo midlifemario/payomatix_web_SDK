@@ -194,7 +194,7 @@ if (isset($response['redirect_url']) && !empty($response['redirect_url'])) {
 
 ## Custom Request Timeouts
 
-By default PHP cURL request timeouts are set. To modify request timeouts (connect or total, in seconds) you'll need to tell the API client to use a CurlClient other than its default. You'll set the timeouts in that CurlClient.
+By default PHP cURL request timeouts are set. To modify request timeouts (connect or total, in seconds) you'll need to tell the API client like this.
 
 ```php
 <?php

@@ -41,7 +41,6 @@ class Seamless extends PackageConfig
 
 		try {
 			$response = json_decode(self::curlPostRequest($url, $headers, json_encode($payload), $options), true);
-			dd($response);
 			if (isset($response['redirect_url']) && !empty($response['redirect_url'])) {
 				return ResponseService::standardSeamlessThreeDS($response);
 			} elseif (isset($response['status']) && $response['status'] == 'status') {

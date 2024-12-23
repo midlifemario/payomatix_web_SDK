@@ -6,7 +6,6 @@ use Payomatix\Service\PaymentService;
 
 class Payomatix extends PaymentService
 {
-	/** @var array options to be used for requests. */
 	public $options;
 
 	public function getOptions()

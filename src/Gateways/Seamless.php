@@ -15,11 +15,7 @@ class Seamless extends PackageConfig
 
 	public static function initializePayment($payload, $options): array
 	{
-		if (isset($payload['is_test']) && $payload['is_test'] == true) {
-			$url = PackageConfig::getSeamlessTestPaymentUrl(); 
-		} else {
-			$url = PackageConfig::getSeamlessLivePaymentUrl();
-		}
+		$url = PackageConfig::getSeamlessPaymentUrl(); 
 
 		self::$secret_key = self::getSecretKey();
 

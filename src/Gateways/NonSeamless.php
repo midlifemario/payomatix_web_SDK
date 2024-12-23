@@ -15,11 +15,7 @@ class NonSeamless extends PackageConfig
 
 	public static function initializePayment($payload, $options): array
 	{
-		if (isset($payload['is_test']) && $payload['is_test'] == true) {
-			$url = self::getNonSeamlessTestPaymentUrl(); 
-		} else {
-			$url = self::getNonSeamlessLivePaymentUrl();
-		}
+		$url = self::getNonSeamlessPaymentUrl(); 
 
 		self::$secret_key = self::getSecretKey();
 

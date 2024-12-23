@@ -10,11 +10,7 @@ class PackageConfig
     public const BASE_URL = 'https://admin.payomatix.com';
 
     public const NONSEAMLESS_PAYMENT_URL = '/payment/merchant/transaction';
-    public const NONSEAMLESS_PAYMENT_TEST_URL = '/payment/merchant/transaction';
-
     public const SEAMLESS_PAYMENT_URL = '/payment/merchant/seamless/transaction';
-    public const SEAMLESS_PAYMENT_TEST_URL = '/payment/merchant/transaction';
-
     public const STATUS_URL = '/payment/get/transaction';
 
 	protected static function getSecretKey()
@@ -48,22 +44,12 @@ class PackageConfig
 		return self::TIME_OUT;
 	}
 
-	protected static function getNonSeamlessTestPaymentUrl()
-	{
-		return self::BASE_URL . self::NONSEAMLESS_PAYMENT_TEST_URL;
-	}
-
-	protected static function getNonSeamlessLivePaymentUrl()
+	protected static function getNonSeamlessPaymentUrl()
 	{
 		return self::BASE_URL . self::NONSEAMLESS_PAYMENT_URL;
 	}
 
-	protected static function getSeamlessTestPaymentUrl()
-	{
-		return self::BASE_URL . self::SEAMLESS_PAYMENT_TEST_URL;
-	}
-
-	protected static function getSeamlessLivePaymentUrl()
+	protected static function getSeamlessPaymentUrl()
 	{
 		return self::BASE_URL . self::SEAMLESS_PAYMENT_URL;
 	}

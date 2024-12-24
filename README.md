@@ -2,7 +2,7 @@
     <img title="Payomatix" height="115" src="https://admin.payomatix.com/storage/newTheme/images/logo.png" width="50%"/>
 </p>
 
-# Payomatix PHP SDK.
+# Payomatix PHP SDK
 
 This Payomatix PHP Library provides easy access to Payomatix APIs for php apps. It abstracts the complexity involved in direct integration and allows you to make quick calls to the APIs.
 

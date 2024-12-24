@@ -141,25 +141,25 @@ class ValidationService extends FieldOptions
 					continue;
 			    // required_if minimum
 				} elseif (substr($validate_method, 0, 12) == 'required_if:') {
-					if (null !== self::validateRequiredIf($fields, $key, $validate_method)) {
+					if (null != self::validateRequiredIf($fields, $key, $validate_method)) {
 			        	$validation_errors[$key] = $key. ' field is required with value passed of '.explode(',', str_replace('required_if:', '', $validate_method))[0].' field';
 			        }
 			    // required_without: required when other field is null
 				} elseif (substr($validate_method, 0, 17) == 'required_without:') {
-					if (null !== self::validateRequiredWithout($fields, $key, $validate_method)) {
+					if (null != self::validateRequiredWithout($fields, $key, $validate_method)) {
 			        	$validation_errors[$key] = $key. ' field is required when '.str_replace('required_without:', '', $validate_method).' field is not present.';
 			        }
 				} elseif (substr($validate_method, 0, 4) == 'min:') {
-					if (null !== self::validateMin($fields, $key, $validate_method)) {
+					if (null != self::validateMin($fields, $key, $validate_method)) {
 			        	$validation_errors[$key] = $key. ' field should not be less than '.str_replace('min:', '', $validate_method);
 			        }
 				} elseif (substr($validate_method, 0, 4) == 'max:') {
-					if (null !== self::validateMax($fields, $key, $validate_method)) {
+					if (null != self::validateMax($fields, $key, $validate_method)) {
 			        	$validation_errors[$key] = $key. ' field should not be greater than '.str_replace('max:', '', $validate_method);
 			        }
 			    // field from in
 				} elseif (substr($validate_method, 0, 3) == 'in:') {
-					if (null !== self::validateIn($fields, $key, $validate_method)) {
+					if (null != self::validateIn($fields, $key, $validate_method)) {
 			        	$validation_errors[$key] = $key. ' field should be from '.str_replace('in:', '', $validate_method);
 			        }
 				} else {
@@ -173,7 +173,7 @@ class ValidationService extends FieldOptions
 
 	public static function validateRequired($fields, $key)
 	{
-		if (isset($fields[$key]) && $fields[$key] !== null) {
+		if (isset($fields[$key]) && $fields[$key] != null) {
         	return null;
         } else {
         	return 1;

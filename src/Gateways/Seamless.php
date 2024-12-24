@@ -43,6 +43,8 @@ class Seamless extends PackageConfig
 				return ResponseService::standardSeamlessSuccess($response);
 			} elseif (isset($response['status']) && $response['status'] == 'fail') {
 				return ResponseService::failed($response);
+			} elseif (isset($response['status']) && $response['status'] == 'unauthorised') {
+				return ResponseService::wrongSecKey($response);
 			} else {
 				return ResponseService::serverError();
 			}

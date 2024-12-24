@@ -107,7 +107,7 @@ $response = $payomatix->nonSeamlessPayment([
 	    'zip' => 'zip',
 	    'country' => 'IN',
 	    'phone_no' => '1234567890',
-	    'card_no' => '4242 4242 4242 4242',
+	    'card_no' => '4242424242424242',
 	],
 	'email' => 'test@jondoe.com',
 	'amount' => '30.00',
@@ -148,7 +148,7 @@ $response = $payomatix->nonSeamlessPayment([
 	'amount' => '30.00',
 	'currency' => 'INR',
 	'return_url' => 'https://mysite.com/redirect/dce35d90-fc2e-4a43-a900-1872d9c00890',
-	'notify_url' => 'https://mysite.com/notify/ce35d90-fc2e-4a43-a900-1872d9c00890'
+	'notify_url' => 'https://mysite.com/notify/ce35d90-fc2e-4a43-a900-1872d9c00890',
 	'merchant_ref' => 'ce35d90-fc2e-4a43-a900-1872d9c00890',
 	'type_id' => '1',
 	'card_no' => '4242424242424242',

@@ -11,12 +11,13 @@ This Payomatix PHP Library provides easy access to Payomatix APIs for php apps. 
 2. [Dependencies](#dependencies)
 3. [Installation](#installation)
 4. [Initialization](#initialization)
-4. [Status](#status)
-4. [Custom Request Timeouts](#custom-request-timeouts)
-5. [Getting Started](#getting-started)
-6. [Debugging Errors](#debugging-errors)
-7. [License](#license)
-8. [References](#references)
+7. [Getting Started](#getting-started)
+5. [Status](#status)
+6. [Custom Request Timeouts](#custom-request-timeouts)
+8. [Debugging Errors](#debugging-errors)
+9. [Terms and Conditions](#terms-and-conditions)
+10. [License](#license)
+11. [References](#references)
 
 <a id="requirements"></a>
 
@@ -220,13 +221,19 @@ We understand that you may run into some errors while integrating our library. Y
 
 For `authorization` and `validation` error responses, double-check your Secret key. If you get a `server` error, kindly engage the team for support.
 
-<a id="license"></a>
+<a id="terms-and-conditions"></a>
 
-## License
+## Terms and Conditions
 
 By using this library, you agree with our [Terms and Conditions](https://payomatix.com/terms-conditions/).
 
 Copyright (c) Payomatix Inc.
+
+<a id="license"></a>
+
+## License
+
+The Laravel framework is open-sourced software licensed under the  [MIT license].(https://opensource.org/license/MIT).
 
 <a id="references"></a>
 

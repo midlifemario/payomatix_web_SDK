@@ -1,7 +1,7 @@
 {
     "name": "payomatix/php-web-sdk",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "Payomatix Web SDK for PHP",
     "keywords": [
         "payomatix",

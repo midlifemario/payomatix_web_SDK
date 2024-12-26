@@ -6,7 +6,7 @@ use Dotenv\Dotenv;
 
 class PackageConfig
 {
-	public const VERSION = '1.0.0';
+	public const VERSION = '1.2.0';
     public const BASE_URL = 'https://admin.payomatix.com';
 
     public const NONSEAMLESS_PAYMENT_URL = '/payment/merchant/transaction';

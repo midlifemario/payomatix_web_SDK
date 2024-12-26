@@ -52,7 +52,7 @@ composer require payomatix/web-sdk
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
 
 ```php
-require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
 ```
 
 <a id="initialization"></a>

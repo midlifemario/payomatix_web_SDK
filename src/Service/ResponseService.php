@@ -64,7 +64,7 @@ class ResponseService
 	{
 		return [
 			'status' => true,
-			'order_id' => $response['redirect_url'],
+			'order_id' => $response['data']['order_id'],
 			'redirect_url' => $response['redirect_url'],
 		];
 	}

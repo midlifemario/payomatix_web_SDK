@@ -70,7 +70,6 @@ Your `.env` file should look this.
 
 ```env
 PAYOMATIX_SECRET_KEY=PAYXXXXXXXXXXXXXXXX.XXXXXXSECKEY
-ENV='staging/production'
 ```
 
 <a id="getting-started"></a>

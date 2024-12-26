@@ -11,9 +11,9 @@ This Payomatix PHP Library provides easy access to Payomatix APIs for php apps. 
 2. [Dependencies](#dependencies)
 3. [Installation](#installation)
 4. [Initialization](#initialization)
-7. [Getting Started](#getting-started)
-5. [Status](#status)
-6. [Custom Request Timeouts](#custom-request-timeouts)
+5. [Getting Started](#getting-started)
+6. [Status](#status)
+7. [Custom Request Timeouts](#custom-request-timeouts)
 8. [Debugging Errors](#debugging-errors)
 9. [Terms and Conditions](#terms-and-conditions)
 10. [License](#license)
@@ -79,7 +79,7 @@ PAYOMATIX_SECRET_KEY=PAYXXXXXXXXXXXXXXXX.XXXXXXSECKEY
 The SDK provides two methods of making collections
 
 1. [Payomatix Non-Seamless]( https://docs.payomatix.com/directPaymentAPI.php#section-2 )
-2. [Payomatix Non-Seamless]( https://docs.payomatix.com/directPaymentAPI.php#section-3 )
+2. [Payomatix Seamless]( https://docs.payomatix.com/directPaymentAPI.php#section-3 )
 
 Simple usage for non-seamless payments looks like:
 
@@ -135,7 +135,7 @@ use Payomatix\Payomatix;
 
 $payomatix = new Payomatix();
 
-$response = $payomatix->nonSeamlessPayment([
+$response = $payomatix->seamlessPayment([
 	'first_name' => 'your-name',
 	'last_name' => 'your-name',
 	'address' => 'address',
@@ -218,7 +218,7 @@ $payomatix->setOptions([
 
 We understand that you may run into some errors while integrating our library. You can contact our developer team for support.
 
-For `authorization` and `validation` error responses, double-check your Secret key. If you get a `server` error, kindly engage the team for support.
+For `Authorization` and `Validation` error responses, double-check your Secret key. If you get a `server` error, kindly engage the team for support.
 
 <a id="terms-and-conditions"></a>
 
